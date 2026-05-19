@@ -1,92 +1,257 @@
-<main class="w-full h-screen bg-neutral-800 bg-cover bg-blend-lighten relative flex justify-center items-center">
-  <div class="absolute  w-full h-screen opacity-70  bg-gray-900 ">
-
+<main class="relative h-screen overflow-hidden bg-[#0f0a07] text-white" dir="rtl">
+  <!-- Background -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(251,146,60,0.16),_transparent_22%),radial-gradient(circle_at_bottom_left,_rgba(249,115,22,0.12),_transparent_28%),linear-gradient(135deg,_#0f0a07_0%,_#16100c_45%,_#22160f_100%)]"></div>
+    <div class="absolute top-[-80px] right-[-40px] h-72 w-72 rounded-full bg-orange-500/10 blur-3xl"></div>
+    <div class="absolute bottom-[-100px] left-[-30px] h-80 w-80 rounded-full bg-amber-400/10 blur-3xl"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20"></div>
   </div>
-  <div class="flex justify-center items-center w-full h-screen">
-    <section class="z-10 flex flex-col text-white justify-center gap-5 h-screen ">
-      <div class="title flex gap-3 text-[1.8rem] yekan font-bold items-center justify-center">
-        <h1>ورود به حساب کاربری</h1>
 
-      </div>
+  <div class="relative z-10 flex h-full items-center justify-center px-4 py-4 sm:px-6 lg:px-8">
+    <div class="grid w-full max-w-7xl grid-cols-1 overflow-hidden rounded-[30px] border border-white/10 bg-white/5 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl lg:grid-cols-2">
 
-      <div  [formGroup]="loginForm" class="w-auto  h-auto rounded-3xl gap-5 flex flex-col  border-[1.4px] border-gray-800 backdrop-blur-3xl p-5 max-[768px]:p-4 bg-[rgb(17,27,36)] opacity-90" dir="rtl">
-        <div class="flex flex-col gap-3 yekan">
-          <label for="username" >نام کاربری</label>
-          <input formControlName="username"  id="username" class="w-[22rem] max-[768px]:w-full z-10 p-3 rounded-xl bg-gray-800 transition-all outline-none
-        duration-300 ease-in ring-0 border-[1px] border-gray-700  focus:border-amber-500" type="text" placeholder="نام کاربری خود را وارد کنید">
-          <span  class="text-rose-500 text-[0.7rem] font-bold text-right"></span>
-        </div>
+      <!-- Right Section -->
+      <section class="relative hidden lg:flex min-h-[720px] overflow-hidden">
+        <div class="absolute top-10 left-10 h-24 w-24 rounded-full bg-orange-400/10 blur-3xl"></div>
+        <div class="absolute bottom-16 right-12 h-32 w-32 rounded-full bg-amber-300/10 blur-3xl"></div>
 
-        <div class="flex flex-col gap-3 yekan">
-          <label for="password">گذرواژه</label>
-          <input formControlName="password" id="password" class="w-[22rem] max-[768px]:w-full z-10 p-3 rounded-xl bg-gray-800 transition-all outline-none
-        duration-300 ease-in ring-0 border-[1px] border-gray-700 focus:border-amber-500" type="text" placeholder="گذرواژه خود را وارد کنید">
-          <span  class="text-rose-500 text-[0.7rem] font-bold text-right">
-          </span>
-        </div>
+        <div class="relative z-10 flex w-full flex-col justify-between p-10 xl:p-12">
+          <!-- Header -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-amber-500 shadow-[0_10px_30px_rgba(249,115,22,0.35)]">
+                <svg class="h-7 w-7 text-[#2b1408]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M6 11h12M8 15h8M10 19h4"/>
+                </svg>
+              </div>
 
-        @if (errorMessage) {
-          <span class="yekan text-rose-500 text-[0.8rem]" dir="rtl">
-          {{errorMessage}}
-          </span>
-        }
+              <div>
+                <h2 class="text-lg font-black text-white">فودینو</h2>
+                <p class="mt-1 text-sm text-orange-100/70">سفارش آنلاین غذای تازه و خوشمزه</p>
+              </div>
+            </div>
 
-        @if (successMessage) {
-          <span class="yekan text-green-300 text-[0.8rem]" dir="rtl">
-          {{successMessage}}
-          </span>
-        }
-
-
-        <div class="flex gap-2 yekan" ><label
-          for="hr"
-          class="flex flex-row items-center gap-2.5 dark:text-white light:text-black"
-        >
-          <input id="hr" type="checkbox" class="peer hidden" />
-          <div
-            for="hr"
-            class="h-5 w-5 flex rounded-md border border-[#a2a1a833] light:bg-[#e8e8e8] dark:bg-[#212121] peer-checked:bg-[rgb(245,158,11)] transition"
-          >
-            <svg
-              fill="none"
-              viewBox="0 0 24 24"
-              class="w-5 h-5 light:stroke-[#e8e8e8] dark:stroke-[#212121]"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4 12.6111L8.92308 17.5L20 6.5"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </svg>
+            <div class="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-medium text-orange-100/80 backdrop-blur-xl">
+              طعم خوب، حال خوب
+            </div>
           </div>
-          مرا به خاطر بسپار
-        </label>
-        </div>
 
-        <div class="flex justify-center flex-col gap-6 yekan">
-          <button  (click)="submit()"  class="w-full bg-amber-500 text-white z-10 p-3  px-5  rounded-xl  font-extrabold
-      cursor-pointer transition-all duration-100
-      hover:shadow-[0px_0px_0px_0px_rgb(245,158,11,0)] text-[0.9rem] disabled:bg-gray-800 disabled:shadow-[0px_0px_0px_0px_rgb(212,254,0)]
-      disabled:text-gray-900 disabled:cursor-not-allowed">ورود به حساب کاربری</button>
-          <div class="w-full p-[0.07rem] bg-gradient-to-r from-transparent via-gray-700 via-gray-700 via-gray-800 to-transparent"></div>
-        </div>
+          <!-- Hero -->
+          <div class="max-w-xl text-right">
+            <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-orange-300/20 bg-orange-400/10 px-4 py-2 text-sm font-semibold text-orange-200 backdrop-blur-xl">
+              <span class="inline-block h-2.5 w-2.5 rounded-full bg-orange-400"></span>
+              خوش آمدید
+            </div>
 
-        <div class="flex justify-between p-3 yekan">
-          <div class="flex gap-2 items-center text-[0.8rem]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21.97 2.33A3.944 3.944 0 0 0 19 1a3.995 3.995 0 0 0-4 4c0 .75.21 1.46.58 2.06.2.34.46.65.76.91C17.04 8.61 17.97 9 19 9c.44 0 .86-.07 1.25-.21.92-.29 1.69-.92 2.17-1.73.21-.34.37-.73.46-1.13.08-.3.12-.61.12-.93 0-1.02-.39-1.96-1.03-2.67Zm-1.48 3.4h-.74v.78c0 .41-.34.75-.75.75s-.75-.34-.75-.75v-.78h-.74c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h.74v-.71c0-.41.34-.75.75-.75s.75.34.75.75v.71h.74a.749.749 0 1 1 0 1.5Z" fill="currentColor"></path><path d="M22 12c0-1.31-.25-2.57-.72-3.72-.31.22-.66.39-1.03.51-.11.04-.22.07-.34.1a8.48 8.48 0 0 1-1.87 9.08c-.29-.37-.66-.71-1.1-1-2.71-1.82-7.15-1.82-9.88 0-.44.29-.8.63-1.1 1A8.48 8.48 0 0 1 3.5 12c0-4.69 3.81-8.5 8.5-8.5 1.09 0 2.14.21 3.1.59.03-.12.06-.23.1-.35.12-.37.29-.71.52-1.02A9.82 9.82 0 0 0 12 2C6.49 2 2 6.49 2 12c0 2.9 1.25 5.51 3.23 7.34 0 .01 0 .01-.01.02.1.1.22.18.32.27.06.05.11.1.17.14.18.15.38.29.57.43l.2.14c.19.13.39.25.6.36.07.04.15.09.22.13.2.11.41.21.63.3.08.04.16.08.24.11.22.09.44.17.66.24.08.03.16.06.24.08.24.07.48.13.72.19.07.02.14.04.22.05.28.06.56.1.85.13.04 0 .08.01.12.02.34.03.68.05 1.02.05.34 0 .68-.02 1.01-.05.04 0 .08-.01.12-.02.29-.03.57-.07.85-.13.07-.01.14-.04.22-.05.24-.06.49-.11.72-.19.08-.03.16-.06.24-.08.22-.08.45-.15.66-.24.08-.03.16-.07.24-.11.21-.09.42-.19.63-.3.08-.04.15-.09.22-.13.2-.12.4-.23.6-.36.07-.04.13-.09.2-.14.2-.14.39-.28.57-.43.06-.05.11-.1.17-.14.11-.09.22-.18.32-.27 0-.01 0-.01-.01-.02C20.75 17.51 22 14.9 22 12Z" fill="currentColor"></path><path d="M12 6.93c-2.07 0-3.75 1.68-3.75 3.75 0 2.03 1.59 3.68 3.7 3.74h.18a3.743 3.743 0 0 0 3.62-3.74c0-2.07-1.68-3.75-3.75-3.75Z" fill="currentColor"></path></svg>
-            <h1>حساب کاربری ندارید ؟</h1>
+            <h1 class="text-4xl font-black leading-[1.5] text-white xl:text-5xl">
+              ورود به دنیای
+              <span class="bg-gradient-to-l from-orange-300 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
+                طعم‌های تازه
+              </span>
+            </h1>
+
+            <p class="mt-6 max-w-lg text-base leading-8 text-orange-50/75">
+              برای ثبت سریع سفارش، مشاهده منوی متنوع رستوران و پیگیری آسان سفارش‌ها،
+              وارد حساب کاربری خود شوید و تجربه‌ای لذت‌بخش از سفارش غذا داشته باشید.
+            </p>
+
+            <!-- Features -->
+            <div class="mt-10 grid grid-cols-2 gap-4">
+              <div class="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl">
+                <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-400/15 text-orange-300">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/>
+                    <circle cx="12" cy="12" r="9"/>
+                  </svg>
+                </div>
+                <h3 class="text-sm font-extrabold text-white">سفارش سریع</h3>
+                <p class="mt-2 text-xs leading-6 text-orange-50/70">
+                  ثبت سفارش در چند مرحله ساده و بدون پیچیدگی
+                </p>
+              </div>
+
+              <div class="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl">
+                <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-400/15 text-amber-300">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8M12 17v4M7 3v7a5 5 0 0 0 10 0V3"/>
+                  </svg>
+                </div>
+                <h3 class="text-sm font-extrabold text-white">منوی متنوع</h3>
+                <p class="mt-2 text-xs leading-6 text-orange-50/70">
+                  دسترسی سریع به غذاهای محبوب، ویژه و جدید
+                </p>
+              </div>
+            </div>
           </div>
-          <div routerLink="/authentication/register" [queryParams]="{'data':'loginPage'}" (mouseenter)="isHover = true" (mouseleave)="isHover = false" class="flex gap-2 items-center text-gray-5 transition-all duration-300 cursor-pointer hover:text-amber-500 ">
-            <h1>ایجاد حساب کاربری</h1>
-            <svg xmlns="http://www.w3.org/2000/svg"   *ngIf="!isHover"  width="14" height="14" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M15 19.92L8.48 13.4c-.77-.77-.77-2.03 0-2.8L15 4.08"></path></svg>
-            <svg xmlns="http://www.w3.org/2000/svg"   *ngIf="isHover"    width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M9.57 5.93L3.5 12l6.07 6.07M20.5 12H3.67"></path></svg>
+
+          <!-- bottom spacer -->
+          <div class="h-2"></div>
+        </div>
+      </section>
+
+      <!-- Left Section / Form -->
+      <section class="flex min-h-screen lg:min-h-[720px] items-center justify-center px-5 py-6 sm:px-8 lg:px-10 xl:px-14">
+        <div class="w-full max-w-md">
+          <!-- Mobile Intro -->
+          <div class="mb-6 lg:hidden">
+            <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-amber-500 shadow-[0_10px_30px_rgba(249,115,22,0.35)]">
+              <svg class="h-7 w-7 text-[#2b1408]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M6 11h12M8 15h8M10 19h4"/>
+              </svg>
+            </div>
+
+            <h2 class="text-2xl font-black text-white">ورود به حساب کاربری</h2>
+            <p class="mt-2 text-sm leading-7 text-orange-50/70">
+              برای ثبت سفارش و مشاهده منو وارد حساب خود شوید.
+            </p>
+          </div>
+
+          <!-- Form Card -->
+          <div class="rounded-[28px] border border-white/10 bg-black/30 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl sm:p-7">
+            <div class="mb-6 hidden lg:block">
+              <div class="inline-flex items-center gap-2 rounded-full border border-orange-300/15 bg-orange-400/10 px-4 py-2 text-xs font-bold text-orange-200">
+                <span class="inline-block h-2 w-2 rounded-full bg-orange-400"></span>
+                ورود کاربران
+              </div>
+
+              <h2 class="mt-5 text-3xl font-black leading-tight text-white">
+                ورود به حساب کاربری
+              </h2>
+
+              <p class="mt-3 text-sm leading-7 text-orange-50/70">
+                اطلاعات ورود خود را وارد کنید تا سفارش غذا را سریع‌تر و راحت‌تر انجام دهید.
+              </p>
+            </div>
+
+            <form class="space-y-4" [formGroup]="loginForm" (ngSubmit)="submit()">
+              <!-- Username -->
+              <div>
+                <label for="username" class="mb-2.5 block text-sm font-semibold text-orange-50">
+                  نام کاربری
+                </label>
+
+                <div class="group flex h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 transition-all duration-200 backdrop-blur-xl focus-within:border-orange-400/40 focus-within:bg-white/10 focus-within:shadow-[0_0_0_4px_rgba(251,146,60,0.10)]">
+                  <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-400/10 text-orange-300 transition group-focus-within:bg-orange-400/15">
+                    <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19a3 3 0 0 0-6 0"/>
+                      <circle cx="12" cy="8" r="4"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 20a8 8 0 0 1 16 0"/>
+                    </svg>
+                  </div>
+
+                  <input
+                    id="username"
+                    type="text"
+                    formControlName="username"
+                    placeholder="نام کاربری خود را وارد کنید"
+                    class="h-full min-w-0 flex-1 border-0 bg-transparent text-sm text-white placeholder:text-orange-100/35 focus:outline-none"
+                  />
+                </div>
+
+                @if (loginForm.get('username')?.touched && loginForm.get('username')?.invalid) {
+                  <p class="mt-2 text-xs text-red-300">
+                    لطفاً نام کاربری را وارد کنید.
+                  </p>
+                }
+              </div>
+
+              <!-- Password -->
+              <div>
+                <div class="mb-2.5 flex items-center justify-between gap-3">
+                  <label for="password" class="block text-sm font-semibold text-orange-50">
+                    رمز عبور
+                  </label>
+
+                  <a href="#" class="text-xs font-semibold text-orange-300 transition hover:text-orange-200">
+                    فراموشی رمز عبور
+                  </a>
+                </div>
+
+                <div class="group flex h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 transition-all duration-200 backdrop-blur-xl focus-within:border-orange-400/40 focus-within:bg-white/10 focus-within:shadow-[0_0_0_4px_rgba(251,146,60,0.10)]">
+                  <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-400/10 text-orange-300 transition group-focus-within:bg-orange-400/15">
+                    <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                      <rect x="5" y="11" width="14" height="10" rx="2"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V8a4 4 0 1 1 8 0v3"/>
+                    </svg>
+                  </div>
+
+                  <input
+                    id="password"
+                    [type]="hidePass ? 'password' : 'text'"
+                    formControlName="password"
+                    placeholder="رمز عبور خود را وارد کنید"
+                    class="h-full min-w-0 flex-1 border-0 bg-transparent text-sm text-white placeholder:text-orange-100/35 focus:outline-none"
+                  />
+
+                  <button
+                    type="button"
+                    (click)="hidePass = !hidePass"
+                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-orange-200/70 transition hover:bg-white/10 hover:text-white"
+                  >
+                    @if (hidePass) {
+                      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    } @else {
+                      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.58 10.58A2 2 0 0 0 13.42 13.42"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.88 5.09A10.94 10.94 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-3.06 3.77"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.23 6.23A17.73 17.73 0 0 0 2 12s3.5 7 10 7a10.9 10.9 0 0 0 3.32-.5"/>
+                      </svg>
+                    }
+                  </button>
+                </div>
+
+                @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+                  <p class="mt-2 text-xs text-red-300">
+                    لطفاً رمز عبور را وارد کنید.
+                  </p>
+                }
+              </div>
+
+              <!-- Options -->
+              <div class="flex items-center justify-between gap-3 pt-1">
+                <label class="flex cursor-pointer items-center gap-2 text-sm text-orange-50/75">
+                  <input
+                    type="checkbox"
+                    class="h-4 w-4 rounded border-white/20 bg-transparent text-orange-400 focus:ring-orange-400/30"
+                  />
+                  <span>مرا به خاطر بسپار</span>
+                </label>
+
+                <div class="rounded-full border border-orange-300/15 bg-orange-400/10 px-3 py-1.5 text-[11px] font-bold text-orange-200">
+                  ورود امن
+                </div>
+              </div>
+
+              <!-- Submit -->
+              <button
+                type="submit"
+                [disabled]="loginForm.invalid"
+                class="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-l from-orange-500 via-orange-400 to-amber-400 px-5 text-sm font-black text-[#2f1708] shadow-[0_14px_35px_rgba(249,115,22,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_45px_rgba(249,115,22,0.45)] disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <svg class="h-5 w-5 transition group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 6l6 6-6 6"/>
+                </svg>
+                <span>ورود و شروع سفارش</span>
+              </button>
+            </form>
+
+            <!-- Footer -->
+            <div class="mt-5 border-t border-white/10 pt-5 text-center">
+              <p class="text-sm text-orange-50/65">
+                هنوز حساب کاربری ندارید؟
+                <a routerLink="/authentication/register" class="font-bold text-orange-300 transition hover:text-orange-200">
+                  ثبت‌نام کنید
+                </a>
+              </p>
+            </div>
           </div>
         </div>
-
-      </div>
-
-    </section>
+      </section>
+    </div>
   </div>
 </main>

@@ -13,12 +13,7 @@
   var(--g3) 0 calc(1.73 * var(--s)) rgb(23 23 23);;
   background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
 }
-.grid-container {
-  display: grid;
-  gap: 20px;
-  justify-items: center;
-  align-items: center;
-}
+
 
 .grid-temp-1 {
   grid-template-columns: repeat(1, 1fr);

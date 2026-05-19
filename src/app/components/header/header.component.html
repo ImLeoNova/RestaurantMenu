@@ -1,40 +1,147 @@
-<header class="rounded-xl bg-neutral-800  h-[5rem] max-[768px]:h-[4rem] w-[40rem] max-[768px]:w-[20rem] flex justify-center items-center">
-  <div class="flex justify-between items-center p-3 w-full pr-5 gap-20   max-[768px]:gap-5">
+<header class="w-full" dir="rtl">
+  <div
+    class="w-full rounded-[1.5rem] border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
+  >
+    <div
+      class="flex items-center justify-between gap-4 sm:gap-6 px-4 sm:px-6 py-3 sm:py-4"
+    >
+      <!-- Right: Logo -->
+      <div class="flex items-center gap-3 shrink-0">
+        <div
+          routerLink="/restaurant-menu"
+          [queryParams]="{ data: fromPAGE }"
+          class="cursor-pointer group flex items-center gap-3"
+        >
+          <div
+            class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-amber-400/20 to-orange-500/20 border border-white/10 flex items-center justify-center shadow-lg overflow-hidden"
+          >
+            <img
+              src="assets/web/logo.png"
+              alt="logo"
+              class="w-10 h-10 sm:w-12 sm:h-12 object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-[12deg]"
+            />
+          </div>
 
-    <div class="image-logo w-[5rem]">
-      <img src="assets/web/logo.png" class="w-[5rem]  max-[768px]:text-[2rem] transition-all duration-300 hover:rotate-90">
+          <div class="hidden sm:flex flex-col leading-tight min-w-0">
+            <h1
+              class="yekan text-white font-extrabold text-[1rem] sm:text-[1.1rem]"
+            >
+              فست فود آرین
+            </h1>
+            <p class="yekan text-white/50 text-[0.75rem]">
+              طعمی متفاوت، تجربه‌ای خاص
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center: Navigation -->
+      <nav
+        class="hidden md:flex items-center gap-2 lg:gap-3 rounded-2xl border border-white/10 bg-black/20 px-2 py-2"
+      >
+        @for (
+          item of [
+            { title: "خانه", route: "/restaurant-menu" },
+            { title: "محصولات", route: "/products" },
+            { title: "درباره ما", route: "/about-us" },
+          ];
+          track item
+        ) {
+          <a
+            [routerLink]="item.route"
+            [queryParams]="{ data: fromPAGE }"
+            routerLinkActive="text-amber-300 bg-amber-500/10 border-amber-400/20"
+            [routerLinkActiveOptions]="{
+              exact: item.route === '/restaurant-menu',
+            }"
+            class="yekan px-4 py-2.5 rounded-xl border border-transparent text-white/75 hover:text-white hover:bg-white/5 transition-all duration-300 text-[0.9rem] font-bold"
+          >
+            {{ item.title }}
+          </a>
+        }
+      </nav>
+
+      <!-- Left: Actions -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <!-- Mobile Menu Button -->
+        <button
+          class="md:hidden w-11 h-11 rounded-xl border border-white/10 bg-white/5 text-white flex items-center justify-center hover:bg-white/10 transition-all duration-300"
+          type="button"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+
+        @switch (isLoggedIn) {
+          @case (true) {
+            <div
+              routerLink="/dashboard"
+              class="cursor-pointer group flex items-center gap-2 rounded-2xl border border-green-400/20 bg-green-500/10 px-2.5 py-2 hover:bg-green-500/15 transition-all duration-300"
+            >
+              <div
+                class="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden border-2 border-green-400/50 bg-white/10"
+              >
+                <img
+                  src="assets/button/profile.png"
+                  alt="profile"
+                  class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                />
+              </div>
+              <div class="hidden lg:flex flex-col leading-tight">
+                <span class="yekan text-white font-bold text-[0.85rem]">
+                  حساب کاربری
+                </span>
+                <span class="yekan text-green-300 text-[0.72rem]">
+                  ورود موفق
+                </span>
+              </div>
+            </div>
+          }
+
+          @case (false) {
+            <button
+              routerLink="/authentication/login"
+              class="yekan px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 text-black font-extrabold text-[0.8rem] sm:text-[0.9rem] shadow-[0_15px_40px_rgba(245,158,11,0.28)] hover:scale-[1.03] transition-all duration-300 cursor-pointer"
+            >
+              ثبت نام / ورود
+            </button>
+          }
+        }
+      </div>
     </div>
 
-    <div class="labels text-white font-bold yekan flex gap-5 max-[768px]:gap-3 ">
-      @for (item of [
-        {title:"درباره ما",route:"/about-us"},
-        {title:"محصولات",route:"/products"},
-        {title:"خانه",route:"/restaurant-menu"}
-      ];track item) {
-        <h1 class="cursor-pointer transition-all duration-300 ring-0
-        hover:text-amber-400 max-[768px]:text-[0.6rem]" [queryParams]="{'data':fromPAGE}" routerLink="{{item.route}}">{{ item.title }}</h1>
-      }
+    <!-- Mobile Navigation -->
+    <div class="md:hidden px-4 pb-4">
+      <div
+        class="grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-black/20 p-2"
+      >
+        @for (
+          item of [
+            { title: "خانه", route: "/restaurant-menu" },
+            { title: "محصولات", route: "/products" },
+            { title: "درباره ما", route: "/about-us" },
+          ];
+          track item
+        ) {
+          <a
+            [routerLink]="item.route"
+            [queryParams]="{ data: fromPAGE }"
+            routerLinkActive="text-amber-300 bg-amber-500/10 border-amber-400/20"
+            [routerLinkActiveOptions]="{
+              exact: item.route === '/restaurant-menu',
+            }"
+            class="yekan text-center px-2 py-3 rounded-xl border border-transparent text-white/75 hover:text-white hover:bg-white/5 transition-all duration-300 text-[0.75rem] font-bold"
+          >
+            {{ item.title }}
+          </a>
+        }
+      </div>
     </div>
-
-
-    @switch (isLoggedIn) {
-      @case (true) {
-        <div>
-          <img routerLink="/dashboard" src="assets/button/profile.png" class="w-[3.5rem] rounded-[50%] p-1 border-2 cursor-pointer transition-all
-           duration-300 hover:rotate-[-90deg] border-green-500 max-[768px]:w-[2.7rem]">
-        </div>
-      }
-      @case (false) {
-        <div class="flex justify-center items-center yekan text-white">
-          <button routerLink="/authentication/login"  class="p-2  max-[768px]:text-[0.6rem]  max-[768px]:w-[6rem] px-4 bg-amber-600 rounded-xl text-[0.8rem] transition-all duration-300 cursor-pointer hover:bg-amber-500">
-            ثبت نام / ورود
-          </button>
-        </div>
-      }
-    }
-
-
   </div>
-
 </header>
-

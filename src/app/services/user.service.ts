@@ -4,6 +4,7 @@ import {User} from "../models/user";
 import {environment} from "../../environments/environment.development";
 import {Observable} from "rxjs";
 import {LoginResponse, RegisterResponse} from "../interfaces/interfaces";
+import {ApiResponse} from "../models/api-response";
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,8 @@ export class UserService {
     })
   }
 
-  loginUser(user:User):Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(this.apiLINK+"/api/user/login",{
+  loginUser(user:User):Observable<ApiResponse<LoginResponse>>{
+    return this.http.post<ApiResponse<LoginResponse>>(this.apiLINK+"/api/user/login",{
       username: user.username,
       password: user.password,
     },{

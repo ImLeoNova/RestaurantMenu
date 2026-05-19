@@ -1,8 +1,7 @@
 export class Chat {
-  author:string
-  message:string
-  constructor(author:string,message:string) {
-    this.author = author;
-    this.message = message;
-  }
+  constructor(
+    public author: 'user' | 'AI',
+    public message: string | null,
+    public isTyping: boolean = false,
+  ) {}
 }

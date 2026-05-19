@@ -18,6 +18,10 @@ export interface AIResponse {
   message:string;
 }
 
+export interface FoodResponse {
+  message:string;
+}
+
 export interface JwtDecoded {
   user_id:string;
   exp: number;

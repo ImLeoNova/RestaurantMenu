@@ -1,39 +1,307 @@
-<footer class=" yekan  flex flex-col border-t border-neutral-600 bg-gray-900">
-    <div class="flex justify-between p-6">
-      <div class="flex flex-col gap-4">
-        <div class="text-[2rem] text-white font-bold">
-          <h2>شبکه های اجتماعی</h2>
-        </div>
-        <div class="flex gap-4 justify-center items-center">
-          <img src="assets/socials/instagram.png" class="w-[2rem]">
-          <img src="assets/socials/Telegram.png" class="w-[2rem]">
-          <img src="assets/socials/Facebook.png" class="w-[2rem]">
-          <img src="assets/socials/Whatsapp.png" class="w-[2rem]">
-        </div>
-      </div>
-      <div class="flex flex-col gap-4 items-center">
-        <div class="text-[2rem] text-white font-bold">
-          <h2>آدرس ما</h2>
-        </div>
-        <div class="flex flex-col items-center gap-4 justify-center text-white">
-          <p>ایران , کرمان , سیرجان</p>
-          <p>خیابان خبرنگار , فست فود آرین</p>
-        </div>
-      </div>
-      <div class="flex flex-col gap-4 items-center">
-        <div class="text-[2rem] text-white font-bold">
-          <h2>تماس با ما</h2>
-        </div>
-        <div class="flex flex-col items-center gap-4 justify-center text-white">
-          <p>Arianrestaurant&#64;info.com : ایمیل </p>
-          <p>تلفن : 03463435125 </p>
+<footer class="w-full yekan" dir="rtl">
+  <div
+    class="w-full rounded-[1.75rem] border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] overflow-hidden"
+  >
+    <!-- Top Glow -->
+    <div
+      class="h-px w-full bg-gradient-to-r from-transparent via-amber-400/40 to-transparent"
+    ></div>
 
+    <div class="px-5 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12">
+      <!-- Header -->
+      <div
+        class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-8 border-b border-white/10"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="w-14 h-14 rounded-2xl border border-white/10 bg-gradient-to-br from-amber-400/20 to-orange-500/20 flex items-center justify-center shadow-lg"
+          >
+            <img
+              src="assets/web/logo.png"
+              alt="logo"
+              class="w-10 h-10 object-contain"
+            />
+          </div>
+
+          <div class="flex flex-col">
+            <h2
+              class="text-white text-[1.2rem] sm:text-[1.4rem] font-extrabold"
+            >
+              فست فود آرین
+            </h2>
+            <p class="text-white/60 text-[0.85rem] sm:text-[0.95rem] leading-7">
+              تجربه‌ای خوشمزه، سریع و متفاوت با طراحی مدرن و سرویس حرفه‌ای
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-wrap items-center gap-3 sm:gap-4 text-white/70 text-[0.85rem] sm:text-[0.95rem]"
+        >
+          <a
+            routerLink="/restaurant-menu"
+            class="hover:text-amber-300 transition-all duration-300"
+          >
+            خانه
+          </a>
+          <span class="text-white/20">•</span>
+          <a
+            routerLink="/products"
+            class="hover:text-amber-300 transition-all duration-300"
+          >
+            محصولات
+          </a>
+          <span class="text-white/20">•</span>
+          <a
+            routerLink="/about-us"
+            class="hover:text-amber-300 transition-all duration-300"
+          >
+            درباره ما
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6 mt-8"
+      >
+        <!-- Social -->
+        <div
+          class="rounded-3xl border border-white/10 bg-black/20 p-5 sm:p-6 hover:bg-white/[0.06] transition-all duration-300"
+        >
+          <div class="flex items-center gap-3 mb-5">
+            <div
+              class="w-11 h-11 rounded-2xl bg-amber-400/10 border border-amber-300/20 flex items-center justify-center"
+            >
+              <svg
+                class="w-5 h-5 text-amber-300"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M17 8.5a5 5 0 0 1 0 7l-3.5 3.5a5 5 0 0 1-7-7L8 10.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M7 15.5a5 5 0 0 1 0-7L10.5 5a5 5 0 0 1 7 7L16 13.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3 class="text-white text-[1.05rem] sm:text-[1.15rem] font-bold">
+              شبکه‌های اجتماعی
+            </h3>
+          </div>
+
+          <p class="text-white/60 text-[0.82rem] leading-7 mb-5">
+            ما را در شبکه‌های اجتماعی دنبال کنید و از جدیدترین محصولات، تخفیف‌ها
+            و خبرها باخبر شوید.
+          </p>
+
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="#"
+              class="group w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center hover:border-pink-400/30 hover:bg-pink-500/10 transition-all duration-300"
+            >
+              <img
+                src="assets/socials/instagram.png"
+                alt="instagram"
+                class="w-6 h-6 object-contain transition-all duration-300 group-hover:scale-110"
+              />
+            </a>
+
+            <a
+              href="#"
+              class="group w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center hover:border-sky-400/30 hover:bg-sky-500/10 transition-all duration-300"
+            >
+              <img
+                src="assets/socials/Telegram.png"
+                alt="telegram"
+                class="w-6 h-6 object-contain transition-all duration-300 group-hover:scale-110"
+              />
+            </a>
+
+            <a
+              href="#"
+              class="group w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center hover:border-blue-400/30 hover:bg-blue-500/10 transition-all duration-300"
+            >
+              <img
+                src="assets/socials/Facebook.png"
+                alt="facebook"
+                class="w-6 h-6 object-contain transition-all duration-300 group-hover:scale-110"
+              />
+            </a>
+
+            <a
+              href="#"
+              class="group w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center hover:border-green-400/30 hover:bg-green-500/10 transition-all duration-300"
+            >
+              <img
+                src="assets/socials/Whatsapp.png"
+                alt="whatsapp"
+                class="w-6 h-6 object-contain transition-all duration-300 group-hover:scale-110"
+              />
+            </a>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div
+          class="rounded-3xl border border-white/10 bg-black/20 p-5 sm:p-6 hover:bg-white/[0.06] transition-all duration-300"
+        >
+          <div class="flex items-center gap-3 mb-5">
+            <div
+              class="w-11 h-11 rounded-2xl bg-orange-400/10 border border-orange-300/20 flex items-center justify-center"
+            >
+              <svg
+                class="w-5 h-5 text-orange-300"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 21s7-5.686 7-11a7 7 0 1 0-14 0c0 5.314 7 11 7 11Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+                <circle
+                  cx="12"
+                  cy="10"
+                  r="2.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+            </div>
+            <h3 class="text-white text-[1.05rem] sm:text-[1.15rem] font-bold">
+              آدرس ما
+            </h3>
+          </div>
+
+          <div
+            class="flex flex-col gap-3 text-white/80 text-[0.9rem] leading-8"
+          >
+            <p>ایران، کرمان، سیرجان</p>
+            <p>خیابان خبرنگار، فست فود آرین</p>
+            <p class="text-white/50 text-[0.8rem]">
+              پذیرای حضور گرم شما در محیطی حرفه‌ای و دلنشین هستیم.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div
+          class="rounded-3xl border border-white/10 bg-black/20 p-5 sm:p-6 hover:bg-white/[0.06] transition-all duration-300"
+        >
+          <div class="flex items-center gap-3 mb-5">
+            <div
+              class="w-11 h-11 rounded-2xl bg-green-400/10 border border-green-300/20 flex items-center justify-center"
+            >
+              <svg
+                class="w-5 h-5 text-green-300"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.91.33 1.8.63 2.65a2 2 0 0 1-.45 2.11L8 9.99a16 16 0 0 0 6 6l1.51-1.29a2 2 0 0 1 2.11-.45c.85.3 1.74.51 2.65.63A2 2 0 0 1 22 16.92Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3 class="text-white text-[1.05rem] sm:text-[1.15rem] font-bold">
+              تماس با ما
+            </h3>
+          </div>
+
+          <div
+            class="flex flex-col gap-3 text-white/80 text-[0.9rem] leading-8"
+          >
+            <p>
+              <span class="text-white/50">ایمیل:</span>
+              Arianrestaurant&#64;info.com
+            </p>
+            <p>
+              <span class="text-white/50">تلفن:</span>
+              03463435125
+            </p>
+            <p class="text-white/50 text-[0.8rem]">
+              برای سفارش، پشتیبانی و همکاری با ما در ارتباط باشید.
+            </p>
+          </div>
+        </div>
+
+        <!-- Quick Info -->
+        <div
+          class="rounded-3xl border border-white/10 bg-gradient-to-br from-amber-400/10 to-orange-500/10 p-5 sm:p-6 hover:from-amber-400/15 hover:to-orange-500/15 transition-all duration-300"
+        >
+          <div class="flex items-center gap-3 mb-5">
+            <div
+              class="w-11 h-11 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center"
+            >
+              <svg
+                class="w-5 h-5 text-amber-300"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 8v4l3 3"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+            </div>
+            <h3 class="text-white text-[1.05rem] sm:text-[1.15rem] font-bold">
+              اطلاعات سریع
+            </h3>
+          </div>
+
+          <div
+            class="flex flex-col gap-3 text-white/85 text-[0.9rem] leading-8"
+          >
+            <p>ارسال سریع و باکیفیت</p>
+            <p>استفاده از مواد اولیه تازه</p>
+            <p>پشتیبانی و پاسخگویی مناسب</p>
+            <p class="text-amber-200 text-[0.82rem] pt-1">
+              همیشه آماده ثبت سفارش شما هستیم.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div
+        class="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4"
+      >
+        <p
+          class="text-white/45 text-[0.8rem] sm:text-[0.9rem] text-center md:text-right"
+        >
+          تمامی حقوق این وب‌سایت محفوظ است.
+        </p>
+
+        <div
+          class="px-4 py-2 rounded-2xl border border-white/10 bg-black/20 text-white/60 text-[0.8rem] sm:text-[0.9rem]"
+        >
+          ساخته شده توسط
+          <span class="text-amber-300 font-bold">آرین</span>
         </div>
       </div>
     </div>
-  <hr class="border-gray-700 mt-5" >
-  <div class="flex justify-center items-center  p-6">
-    <h1 class="yekan text-gray-500 text-[0.9rem]"> ساخته شده توسط آرین</h1>
   </div>
 </footer>
-
