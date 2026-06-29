@@ -1,44 +1,64 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {User} from "../models/user";
-import {environment} from "../../environments/environment.development";
-import {Observable} from "rxjs";
-import {LoginResponse, RegisterResponse} from "../interfaces/interfaces";
-import {ApiResponse} from "../models/api-response";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../models/user';
+import { environment } from '../../environments/environment.development';
+import { Observable } from 'rxjs';
+import { LoginResponse, RegisterResponse } from '../interfaces/interfaces';
+import { ApiResponse } from '../models/api-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  apiLINK: string = environment.websiteAPI;
 
-  apiLINK:string = environment.websiteAPI
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  registerUser(user:User):Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(this.apiLINK+"/api/user/add",{
-      username:user.username,
-      password:user.password,
-      email:user.email
-    },{
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    })
+  registerUser(user: User): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(
+      this.apiLINK + '/api/user/add',
+      {
+        username: user.username,
+        password: user.password,
+        email: user.email,
+      },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      },
+    );
   }
 
-  loginUser(user:User):Observable<ApiResponse<LoginResponse>>{
-    return this.http.post<ApiResponse<LoginResponse>>(this.apiLINK+"/api/user/login",{
-      username: user.username,
-      password: user.password,
-    },{
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    })
+  loginUser(user: User): Observable<ApiResponse<LoginResponse>> {
+    return this.http.post<ApiResponse<LoginResponse>>(
+      this.apiLINK + '/api/user/login',
+      {
+        username: user.username,
+        password: user.password,
+      },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      },
+    );
   }
 
   isTokenValid(token: string | null) {
-    return this.http.post(`${environment.websiteAPI}/verify-token`, { "token":token })
+    return this.http.post(`${environment.websiteAPI}/verify-token`, {
+      token: token,
+    });
+  }
+
+  getAllUsers(
+    token: string | null,
+  ): Observable<ApiResponse<{ users: User[] }>> {
+    return this.http.get<ApiResponse<{ users: User[] }>>(
+      `${environment.websiteAPI}/api/user/list`,
+      {
+        headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
+      },
+    );
   }
 }

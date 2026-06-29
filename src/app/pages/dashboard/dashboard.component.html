@@ -21,7 +21,6 @@
       class="w-full lg:w-[18rem] lg:min-h-screen border-b lg:border-b-0 lg:border-l border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl flex flex-col justify-between shrink-0"
     >
       <div>
-        <!-- Top -->
         <div class="p-4 sm:p-6 border-b border-white/10">
           <div class="flex items-center gap-3" dir="rtl">
             <div
@@ -48,7 +47,6 @@
           </div>
         </div>
 
-        <!-- User card -->
         <div class="p-3 sm:p-4">
           <div
             class="rounded-3xl p-4 border shadow-xl"
@@ -96,7 +94,6 @@
           </div>
         </div>
 
-        <!-- Nav -->
         <nav class="px-3 pb-4 sm:pb-6 flex flex-col gap-2" dir="rtl">
           <div
             (click)="setPage('home')"
@@ -231,7 +228,6 @@
         </nav>
       </div>
 
-      <!-- Bottom action -->
       <div class="p-3 sm:p-4 border-t border-white/10">
         <div
           routerLink="/restaurant-menu"
@@ -260,7 +256,6 @@
 
     <!-- Content -->
     <section class="flex-1 min-w-0">
-      <!-- Header -->
       <header class="p-3 sm:p-4 md:p-6">
         <div
           class="relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 p-4 sm:p-6 md:p-8 backdrop-blur-2xl shadow-2xl"
@@ -298,8 +293,8 @@
               <p
                 class="yekan text-white/70 text-[0.9rem] sm:text-[0.95rem] max-w-[40rem] leading-7 mx-auto lg:mx-0"
               >
-                از این بخش می‌تونی مدیریت کامل محصولات، کاربران و تنظیمات وبسایت
-                رو با یک ظاهر مدرن و حرفه‌ای انجام بدی.
+                شما در این بخش از سایت خود میتوانید با داشبورد سفارشات خود را به
+                راحتی ثبت کنید
               </p>
             </div>
 
@@ -316,7 +311,6 @@
         </div>
       </header>
 
-      <!-- Pages -->
       <div class="px-3 sm:px-4 md:px-6 pb-6 sm:pb-8">
         @switch (nowPage) {
           @case ("home") {
@@ -332,12 +326,12 @@
                     <p
                       class="yekan text-white/60 text-[0.85rem] sm:text-[0.9rem]"
                     >
-                      تعداد دسته‌بندی‌ها
+                      تعداد محصولات
                     </p>
                     <h2
                       class="yekan text-[1.6rem] sm:text-[2rem] font-extrabold mt-2 truncate"
                     >
-                      {{ categoryService.getCategories().length }}
+                      {{ products.length }}
                     </h2>
                   </div>
                   <div
@@ -372,11 +366,7 @@
                     <h2
                       class="yekan text-[1.6rem] sm:text-[2rem] font-extrabold mt-2 truncate"
                     >
-                      {{
-                        categoryService.getFoodsByCategory(
-                          categoryService.nowCategory
-                        ).length
-                      }}
+                      {{ getProductsByCurrentCategory().length }}
                     </h2>
                   </div>
                   <div
@@ -416,11 +406,7 @@
                     <h2
                       class="yekan text-[1.15rem] sm:text-[1.4rem] font-extrabold mt-2 break-words"
                     >
-                      {{
-                        categoryService.getCATEGORY(
-                          categoryService.nowCategory
-                        )["title"]
-                      }}
+                      {{ categoryService.nowCategory || "انتخاب نشده" }}
                     </h2>
                   </div>
                   <div
@@ -511,7 +497,7 @@
 
                   <div class="flex flex-wrap gap-3">
                     <button
-                      (click)="nowModal = 'add'"
+                      (click)="openModal('add')"
                       class="group rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 px-4 sm:px-5 py-3.5 sm:py-4 yekan font-bold text-white shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3"
                     >
                       <svg
@@ -530,7 +516,7 @@
                     </button>
 
                     <button
-                      (click)="nowModal = 'search'"
+                      (click)="openModal('search')"
                       class="group rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-600 px-4 sm:px-5 py-3.5 sm:py-4 yekan font-bold text-white shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3"
                     >
                       <svg
@@ -554,44 +540,6 @@
                       </svg>
                       <span class="whitespace-nowrap">جستجو</span>
                     </button>
-
-                    <button
-                      (click)="nowModal = 'update'"
-                      class="group rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 px-4 sm:px-5 py-3.5 sm:py-4 yekan font-bold text-white shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3"
-                    >
-                      <svg
-                        class="w-5 h-5 shrink-0"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="m4 20 4.5-1 9-9a2.1 2.1 0 0 0-3-3l-9 9L4 20Z"
-                          stroke="currentColor"
-                          stroke-width="1.8"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      <span class="whitespace-nowrap">ویرایش محصول</span>
-                    </button>
-
-                    <button
-                      (click)="nowModal = 'remove'"
-                      class="group rounded-2xl bg-gradient-to-r from-red-500 to-rose-600 px-4 sm:px-5 py-3.5 sm:py-4 yekan font-bold text-white shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3"
-                    >
-                      <svg
-                        class="w-5 h-5 shrink-0"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M6 7h12M9 7V5h6v2m-7 3v7m4-7v7m4-7v7M8 19h8a1 1 0 0 0 1-1V7H7v11a1 1 0 0 0 1 1Z"
-                          stroke="currentColor"
-                          stroke-width="1.8"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                      <span class="whitespace-nowrap">حذف محصول</span>
-                    </button>
                   </div>
                 </div>
               </div>
@@ -605,23 +553,11 @@
                   dir="rtl"
                 >
                   <div class="flex items-center gap-3 min-w-0">
-                    <img
-                      class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover bg-white/10 p-2 border border-white/10 shrink-0"
-                      [src]="
-                        categoryService.getCATEGORY(
-                          categoryService.nowCategory
-                        )['image']
-                      "
-                    />
                     <div class="min-w-0">
                       <h2
                         class="yekan font-extrabold text-[1.2rem] sm:text-[1.5rem] break-words"
                       >
-                        {{
-                          categoryService.getCATEGORY(
-                            categoryService.nowCategory
-                          )["title"]
-                        }}
+                        {{ categoryService.nowCategory || "همه محصولات" }}
                       </h2>
                       <p
                         class="yekan text-white/60 text-[0.8rem] sm:text-[0.85rem]"
@@ -639,9 +575,7 @@
                   ) {
                     <div
                       class="w-[8.5rem] sm:w-[10rem] shrink-0 rounded-[1.4rem] sm:rounded-[1.6rem] p-3 sm:p-4 border cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col items-center justify-center gap-3"
-                      (click)="
-                        categoryService.nowCategory = categoryITEM.category
-                      "
+                      (click)="onCategoryChange(categoryITEM.category)"
                       [ngClass]="{
                         'bg-gradient-to-b from-amber-500/30 to-orange-500/10 border-amber-300/40 shadow-xl':
                           categoryITEM.category == categoryService.nowCategory,
@@ -672,11 +606,7 @@
               <div
                 class="rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl p-4 sm:p-5 shadow-xl"
               >
-                @if (
-                  categoryService.getFoodsByCategory(
-                    categoryService.nowCategory
-                  ).length == 0
-                ) {
+                @if (getProductsByCurrentCategory().length == 0) {
                   <div
                     class="flex flex-col items-center justify-center py-14 sm:py-20 text-center"
                     dir="rtl"
@@ -715,19 +645,13 @@
                   </div>
                 }
 
-                @if (
-                  categoryService.getFoodsByCategory(
-                    categoryService.nowCategory
-                  ).length !== 0
-                ) {
+                @if (getProductsByCurrentCategory().length !== 0) {
                   <div
                     class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4 sm:gap-6"
                     dir="rtl"
                   >
                     @for (
-                      foodItem of categoryService.getFoodsByCategory(
-                        categoryService.nowCategory
-                      );
+                      foodItem of getProductsByCurrentCategory();
                       track foodItem
                     ) {
                       <div
@@ -737,7 +661,12 @@
                           class="relative h-[12rem] sm:h-[14rem] overflow-hidden bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center"
                         >
                           <img
-                            [src]="foodItem.image"
+                            [src]="
+                              foodItem.image ||
+                              productService.getProductImageURL(
+                                foodItem.product_ID
+                              )
+                            "
                             class="w-[8rem] h-[8rem] sm:w-[11rem] sm:h-[11rem] object-contain group-hover:scale-110 transition-all duration-500"
                           />
                           <div
@@ -777,7 +706,7 @@
                             <div class="flex items-center gap-2 shrink-0">
                               <button
                                 class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-amber-500/15 border border-amber-400/20 text-amber-300 flex items-center justify-center hover:bg-amber-500/25 transition-all"
-                                (click)="nowModal = 'update'"
+                                (click)="selectProductForUpdate(foodItem)"
                               >
                                 <svg
                                   class="w-5 h-5"
@@ -795,7 +724,7 @@
 
                               <button
                                 class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-red-500/15 border border-red-400/20 text-red-300 flex items-center justify-center hover:bg-red-500/25 transition-all"
-                                (click)="nowModal = 'remove'"
+                                (click)="selectProductForDelete(foodItem)"
                               >
                                 <svg
                                   class="w-5 h-5"
@@ -822,50 +751,340 @@
           }
 
           @case ("users") {
-            <div
-              class="rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-10 shadow-xl text-center"
-              dir="rtl"
-            >
-              <div class="flex flex-col items-center gap-4">
+            <div class="flex flex-col gap-6" dir="rtl">
+              <!-- Header -->
+              <div
+                class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-l from-amber-500/10 via-orange-500/5 to-transparent backdrop-blur-xl p-5 sm:p-6 shadow-xl"
+              >
                 <div
-                  class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-fuchsia-500/15 flex items-center justify-center"
+                  class="absolute top-0 left-0 w-[20rem] h-[20rem] bg-amber-500/10 blur-[80px] rounded-full -translate-x-1/2 -translate-y-1/2"
+                ></div>
+                <div
+                  class="absolute bottom-0 right-0 w-[15rem] h-[15rem] bg-orange-500/10 blur-[60px] rounded-full translate-x-1/3 translate-y-1/3"
+                ></div>
+
+                <div
+                  class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-5"
                 >
-                  <svg
-                    class="w-8 h-8 sm:w-10 sm:h-10 text-fuchsia-300"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      d="M16 19a4 4 0 0 0-8 0"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
+                  <div class="flex items-center gap-4 min-w-0">
+                    <div
+                      class="w-16 h-16 rounded-[1.4rem] bg-gradient-to-br from-amber-400/30 to-orange-600/20 border border-amber-400/40 flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(245,158,11,0.15)]"
+                    >
+                      <svg
+                        class="w-8 h-8 text-amber-300"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                        />
+                        <circle
+                          cx="9"
+                          cy="7"
+                          r="4"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                        />
+                        <path
+                          d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </div>
+                    <div class="min-w-0">
+                      <h1
+                        class="yekan text-white font-extrabold text-[1.6rem] sm:text-[2rem]"
+                      >
+                        مدیریت کاربران
+                      </h1>
+                      <div class="flex items-center gap-2 mt-1">
+                        <div
+                          class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+                        ></div>
+                        <p class="yekan text-white/50 text-[0.85rem]">
+                          {{ filteredUsers.length }} کاربر فعال در سیستم
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Search -->
+                  <div class="relative w-full sm:w-auto">
+                    <svg
+                      class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/60"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <circle
+                        cx="11"
+                        cy="11"
+                        r="8"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                      />
+                      <path
+                        d="m21 21-4.35-4.35"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <input
+                      type="text"
+                      [(ngModel)]="searchUserKeyword"
+                      (input)="searchUsers()"
+                      placeholder="جستجو بر اساس نام یا ایمیل..."
+                      class="yekan w-full sm:w-[22rem] bg-white/10 border border-white/20 rounded-2xl pr-11 pl-4 py-3.5 text-white placeholder:text-white/50 text-[0.9rem] outline-none focus:border-amber-400/70 focus:bg-white/15 transition-all"
                     />
-                    <circle
-                      cx="12"
-                      cy="11"
-                      r="3"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                    />
-                    <path
-                      d="M5 19a3 3 0 0 1 3-3M19 19a3 3 0 0 0-3-3"
-                      stroke="currentColor"
-                      stroke-width="1.6"
-                      stroke-linecap="round"
-                    />
-                  </svg>
+                  </div>
                 </div>
-                <h1 class="yekan text-[1.5rem] sm:text-[2rem] font-extrabold">
-                  مدیریت کاربران
-                </h1>
-                <p class="yekan text-white/60 text-[0.9rem] sm:text-[1rem]">
-                  این بخش آماده طراحی جزئیات بیشتر است.
-                </p>
+              </div>
+
+              <!-- Loading -->
+              <div
+                *ngIf="isLoadingUsers"
+                class="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl py-24 flex items-center justify-center"
+              >
+                <div class="flex flex-col items-center gap-4">
+                  <div
+                    class="w-12 h-12 border-2 border-amber-400/20 border-t-amber-400 rounded-full animate-spin"
+                  ></div>
+                  <p class="yekan text-white/40 text-[0.9rem]">
+                    در حال بارگذاری کاربران...
+                  </p>
+                </div>
+              </div>
+
+              <!-- Empty -->
+              <div
+                *ngIf="!isLoadingUsers && filteredUsers.length === 0"
+                class="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl py-24 text-center"
+              >
+                <div class="flex flex-col items-center gap-4">
+                  <div
+                    class="w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-9 h-9 text-white/20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                      />
+                      <circle
+                        cx="9"
+                        cy="7"
+                        r="4"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                      />
+                    </svg>
+                  </div>
+                  <h2 class="yekan text-white/60 font-bold text-[1.2rem]">
+                    کاربری یافت نشد
+                  </h2>
+                </div>
+              </div>
+
+              <!-- Cards -->
+              <div
+                *ngIf="!isLoadingUsers && filteredUsers.length > 0"
+                class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5"
+              >
+                <div
+                  *ngFor="let u of filteredUsers; let i = index"
+                  class="group relative overflow-hidden rounded-[1.8rem] border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+                  [ngClass]="{
+                    'bg-gradient-to-br from-amber-500/10 to-orange-500/5 border-amber-400/20 hover:border-amber-400/40 hover:shadow-amber-500/10':
+                      u.role === Roles.ADMIN,
+                    'bg-gradient-to-br from-emerald-500/10 to-green-600/5 border-emerald-400/20 hover:border-emerald-400/40 hover:shadow-emerald-500/10':
+                      u.role === Roles.USER,
+                    'bg-gradient-to-br from-purple-500/10 to-fuchsia-500/5 border-purple-400/20 hover:border-purple-400/40 hover:shadow-purple-500/10':
+                      u.role === Roles.FOUNDER,
+                  }"
+                >
+                  <!-- Glow BG -->
+                  <div
+                    class="absolute -top-10 -right-10 w-36 h-36 rounded-full blur-[55px] opacity-30 group-hover:opacity-60 transition-opacity duration-300"
+                    [ngClass]="{
+                      'bg-amber-400': u.role === Roles.ADMIN,
+                      'bg-emerald-400': u.role === Roles.USER,
+                      'bg-purple-400': u.role === Roles.FOUNDER,
+                    }"
+                  ></div>
+
+                  <div class="relative z-10 p-5 flex flex-col gap-4">
+                    <!-- Top Row -->
+                    <div class="flex items-start justify-between gap-3">
+                      <div class="flex items-center gap-3 min-w-0">
+                        <!-- Avatar -->
+                        <div
+                          class="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 font-extrabold text-[1.4rem] shadow-lg"
+                          [ngClass]="{
+                            'bg-gradient-to-br from-amber-400/50 to-orange-500/40 border border-amber-400/50 text-amber-100':
+                              u.role === Roles.ADMIN,
+                            'bg-gradient-to-br from-emerald-400/50 to-green-500/40 border border-emerald-400/50 text-emerald-100':
+                              u.role === Roles.USER,
+                            'bg-gradient-to-br from-purple-400/50 to-fuchsia-500/40 border border-purple-400/50 text-purple-100':
+                              u.role === Roles.FOUNDER,
+                          }"
+                        >
+                          {{ u.username.charAt(0).toUpperCase() }}
+                        </div>
+
+                        <div class="min-w-0">
+                          <h2
+                            class="yekan text-white font-extrabold text-[1.05rem] truncate"
+                          >
+                            {{ u.username }}
+                          </h2>
+                          <p
+                            class="yekan text-white/40 text-[0.78rem] truncate mt-0.5"
+                          >
+                            {{ u.email }}
+                          </p>
+                        </div>
+                      </div>
+
+                      <!-- Role Badge -->
+                      <span
+                        class="yekan text-[0.72rem] font-bold px-3 py-1.5 rounded-xl shrink-0 mt-1"
+                        [ngClass]="{
+                          'bg-amber-500/20 text-amber-300 border border-amber-400/30':
+                            u.role === Roles.ADMIN,
+                          'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30':
+                            u.role === Roles.USER,
+                          'bg-purple-500/20 text-purple-300 border border-purple-400/30':
+                            u.role === Roles.FOUNDER,
+                        }"
+                      >
+                        {{
+                          u.role === Roles.ADMIN
+                            ? "ادمین"
+                            : u.role === Roles.FOUNDER
+                              ? "مدیر"
+                              : "کاربر"
+                        }}
+                      </span>
+                    </div>
+
+                    <!-- Divider -->
+                    <div
+                      class="h-px w-full"
+                      [ngClass]="{
+                        'bg-gradient-to-r from-amber-400/40 to-transparent':
+                          u.role === Roles.ADMIN,
+                        'bg-gradient-to-r from-emerald-400/40 to-transparent':
+                          u.role === Roles.USER,
+                        'bg-gradient-to-r from-purple-400/40 to-transparent':
+                          u.role === Roles.FOUNDER,
+                      }"
+                    ></div>
+
+                    <!-- Email Row -->
+                    <div class="flex items-center gap-2.5 px-1">
+                      <div
+                        class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
+                        [ngClass]="{
+                          'bg-amber-500/15': u.role === Roles.ADMIN,
+                          'bg-emerald-500/15': u.role === Roles.USER,
+                          'bg-purple-500/15': u.role === Roles.FOUNDER,
+                        }"
+                      >
+                        <svg
+                          class="w-3.5 h-3.5"
+                          [ngClass]="{
+                            'text-amber-400': u.role === Roles.ADMIN,
+                            'text-emerald-400': u.role === Roles.USER,
+                            'text-purple-400': u.role === Roles.FOUNDER,
+                          }"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                          />
+                          <path
+                            d="m22 6-10 7L2 6"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                          />
+                        </svg>
+                      </div>
+                      <span
+                        class="yekan text-white/55 text-[0.82rem] truncate"
+                        >{{ u.email }}</span
+                      >
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex gap-2 mt-1">
+                      <button
+                        (click)="test()"
+                        class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-amber-500/10 border border-amber-400/25 hover:bg-amber-500/25 hover:border-amber-400/60 transition-all duration-200"
+                      >
+                        <svg
+                          class="w-3.5 h-3.5 text-amber-400"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                          />
+                          <path
+                            d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                          />
+                        </svg>
+                        <span
+                          class="yekan text-amber-400 text-[0.8rem] font-bold"
+                          >ویرایش</span
+                        >
+                      </button>
+
+                      <button
+                        (click)="test()"
+                        class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-red-500/10 border border-red-400/25 hover:bg-red-500/25 hover:border-red-400/60 transition-all duration-200"
+                      >
+                        <svg
+                          class="w-3.5 h-3.5 text-red-400"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M6 7h12M9 7V5h6v2m-7 3v7m4-7v7M8 19h8a1 1 0 0 0 1-1V7H7v11a1 1 0 0 0 1 1Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                          />
+                        </svg>
+                        <span class="yekan text-red-400 text-[0.8rem] font-bold"
+                          >حذف</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           }
-
           @case ("website") {
             <div
               class="rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-10 shadow-xl text-center"
@@ -951,7 +1170,7 @@
           </div>
 
           <button
-            (click)="nowModal = undefined"
+            (click)="closeModal()"
             class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl border border-white/10 bg-white/5 hover:bg-red-500/20 hover:border-red-400/20 transition-all flex items-center justify-center shrink-0"
           >
             <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none">
@@ -966,13 +1185,12 @@
         </div>
 
         <div class="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          <!-- Upload -->
           <div class="flex flex-col gap-4 min-w-0">
             <h3 class="yekan text-[1rem] sm:text-[1.1rem] font-bold">
               تصویر محصول
             </h3>
 
-            @if (imageADD === undefined) {
+            @if (imgSRC === null) {
               <label class="cursor-pointer">
                 <div
                   class="h-[18rem] sm:h-[22rem] rounded-[1.4rem] sm:rounded-[1.8rem] border-2 border-dashed border-white/15 bg-white/5 hover:bg-white/10 transition-all duration-300 flex flex-col items-center justify-center gap-4 p-4"
@@ -1025,7 +1243,6 @@
             }
           </div>
 
-          <!-- Form -->
           <div
             [formGroup]="addFoodFORM"
             class="flex flex-col gap-4 sm:gap-5 min-w-0"
@@ -1104,6 +1321,18 @@
               </div>
             }
 
+            @if (successMessage !== undefined) {
+              <div
+                class="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3"
+              >
+                <h1
+                  class="yekan text-[0.85rem] sm:text-[0.9rem] font-bold text-emerald-300 break-words"
+                >
+                  {{ successMessage }}
+                </h1>
+              </div>
+            }
+
             <div class="mt-2 sm:mt-3 flex flex-col sm:flex-row flex-wrap gap-3">
               <button
                 (click)="addFood()"
@@ -1122,7 +1351,7 @@
               </button>
 
               <button
-                (click)="nowModal = undefined"
+                (click)="closeModal()"
                 class="rounded-2xl border border-red-400/20 bg-red-500/10 px-6 py-4 yekan font-bold text-red-300 hover:bg-red-500/20 transition-all duration-300 flex items-center justify-center gap-3"
               >
                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
@@ -1182,7 +1411,7 @@
           </div>
 
           <button
-            (click)="nowModal = undefined"
+            (click)="closeModal()"
             class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl border border-white/10 bg-white/5 hover:bg-red-500/20 transition-all flex items-center justify-center shrink-0"
           >
             <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none">
@@ -1198,6 +1427,7 @@
 
         <div class="flex flex-col gap-4">
           <input
+            [(ngModel)]="searchKeyword"
             type="text"
             placeholder="جستجو بر اساس نام محصول..."
             class="w-full rounded-2xl bg-white/5 border border-white/10 px-4 py-4 text-white outline-none focus:border-blue-400 transition-all"
@@ -1205,12 +1435,13 @@
 
           <div class="flex flex-col sm:flex-row gap-3">
             <button
+              (click)="searchProducts(); closeModal()"
               class="rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-600 px-6 py-4 yekan font-bold text-white hover:scale-[1.01] transition-all duration-300 shadow-lg"
             >
               جستجو
             </button>
             <button
-              (click)="nowModal = undefined"
+              (click)="closeModal()"
               class="rounded-2xl border border-white/10 bg-white/5 px-6 py-4 yekan font-bold text-white hover:bg-white/10 transition-all duration-300"
             >
               بستن
@@ -1222,38 +1453,237 @@
 
     @case ("update") {
       <div
-        class="w-full max-w-[36rem] rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 bg-[#111827]/95 text-white shadow-2xl p-6 sm:p-8 text-center my-6"
+        class="w-full max-w-[56rem] rounded-[1.5rem] sm:rounded-[2rem] border border-white/10 bg-[#111827]/95 text-white shadow-2xl overflow-hidden my-6"
         dir="rtl"
       >
-        <div class="flex flex-col items-center gap-4">
-          <div
-            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-amber-500/15 flex items-center justify-center border border-amber-400/20"
-          >
-            <svg
-              class="w-8 h-8 sm:w-9 sm:h-9 text-amber-300"
-              viewBox="0 0 24 24"
-              fill="none"
+        <div
+          class="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between gap-3 bg-white/5"
+        >
+          <div class="flex items-center gap-3 min-w-0">
+            <div
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-amber-500/15 flex items-center justify-center border border-amber-400/20 shrink-0"
             >
+              <svg
+                class="w-5 h-5 sm:w-6 sm:h-6 text-amber-300"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="m4 20 4.5-1 9-9a2.1 2.1 0 0 0-3-3l-9 9L4 20Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h2
+                class="yekan text-[1.1rem] sm:text-[1.4rem] font-extrabold break-words"
+              >
+                ویرایش محصول
+              </h2>
+              <p class="yekan text-white/50 text-[0.8rem] sm:text-[0.85rem]">
+                اطلاعات محصول را ویرایش کن
+              </p>
+            </div>
+          </div>
+
+          <button
+            (click)="closeModal()"
+            class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl border border-white/10 bg-white/5 hover:bg-red-500/20 transition-all flex items-center justify-center shrink-0"
+          >
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none">
               <path
-                d="m4 20 4.5-1 9-9a2.1 2.1 0 0 0-3-3l-9 9L4 20Z"
+                d="M6 6l12 12M18 6 6 18"
                 stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linejoin="round"
+                stroke-width="2"
+                stroke-linecap="round"
               />
             </svg>
-          </div>
-          <h1 class="yekan text-[1.4rem] sm:text-[1.8rem] font-extrabold">
-            بخش ویرایش
-          </h1>
-          <p class="yekan text-white/60 text-[0.9rem] sm:text-[1rem]">
-            فرم ویرایش محصول را می‌توانم در مرحله بعد کامل برایت بسازم.
-          </p>
-          <button
-            (click)="nowModal = undefined"
-            class="mt-3 rounded-2xl bg-amber-500/15 border border-amber-400/20 px-6 py-4 yekan font-bold text-amber-300 hover:bg-amber-500/25 transition-all"
-          >
-            بستن
           </button>
+        </div>
+
+        <div
+          class="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
+          [formGroup]="updateFoodFORM"
+        >
+          <div class="flex flex-col gap-4 min-w-0">
+            <h3 class="yekan text-[1rem] sm:text-[1.1rem] font-bold">
+              تصویر محصول
+            </h3>
+
+            @if (updateImgSRC === null) {
+              <label class="cursor-pointer">
+                <div
+                  class="h-[18rem] sm:h-[22rem] rounded-[1.4rem] sm:rounded-[1.8rem] border-2 border-dashed border-white/15 bg-white/5 hover:bg-white/10 transition-all duration-300 flex flex-col items-center justify-center gap-4 p-4"
+                >
+                  <div
+                    class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/10 flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 sm:w-10 sm:h-10 text-white/80"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M12 16V8m0 0-3 3m3-3 3 3"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M5 16.5A3.5 3.5 0 0 0 8.5 20h7a3.5 3.5 0 0 0 3.5-3.5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="text-center">
+                    <h4 class="yekan font-bold text-[1rem] sm:text-[1.05rem]">
+                      آپلود عکس جدید
+                    </h4>
+                    <p
+                      class="yekan text-white/50 text-[0.8rem] sm:text-[0.85rem] mt-1"
+                    >
+                      روی این بخش کلیک کن و تصویر جدید را انتخاب کن
+                    </p>
+                  </div>
+                </div>
+                <input
+                  (input)="updateInput($event)"
+                  type="file"
+                  class="hidden"
+                />
+              </label>
+            } @else {
+              <div class="flex flex-col gap-3">
+                <div
+                  class="h-[18rem] sm:h-[22rem] rounded-[1.4rem] sm:rounded-[1.8rem] border border-white/10 bg-white/5 overflow-hidden flex items-center justify-center p-4"
+                >
+                  <img
+                    [src]="updateImgSRC"
+                    class="max-h-full max-w-full object-contain rounded-2xl"
+                  />
+                </div>
+
+                <label class="cursor-pointer">
+                  <div
+                    class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center hover:bg-white/10 transition-all"
+                  >
+                    انتخاب تصویر جدید
+                  </div>
+                  <input
+                    (input)="updateInput($event)"
+                    type="file"
+                    class="hidden"
+                  />
+                </label>
+              </div>
+            }
+          </div>
+
+          <div class="flex flex-col gap-4 sm:gap-5 min-w-0">
+            <input formControlName="product_id" type="hidden" />
+
+            <div class="flex flex-col gap-2">
+              <label class="yekan font-semibold text-white/90">نام محصول</label>
+              <input
+                formControlName="foodName"
+                type="text"
+                placeholder="مثلا: پیتزا مخصوص"
+                class="w-full rounded-2xl bg-white/5 border border-white/10 px-4 py-4 text-white outline-none focus:border-amber-400 transition-all"
+              />
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label class="yekan font-semibold text-white/90">توضیحات</label>
+              <textarea
+                formControlName="foodDescription"
+                rows="5"
+                placeholder="توضیحات محصول را وارد کنید..."
+                class="w-full rounded-2xl bg-white/5 border border-white/10 px-4 py-4 text-white outline-none focus:border-amber-400 transition-all resize-none"
+              ></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-2">
+                <label class="yekan font-semibold text-white/90">قیمت</label>
+                <input
+                  formControlName="foodPrice"
+                  type="text"
+                  placeholder="مثلا: 250000"
+                  class="w-full rounded-2xl bg-white/5 border border-white/10 px-4 py-4 text-white outline-none focus:border-amber-400 transition-all"
+                />
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label class="yekan font-semibold text-white/90"
+                  >دسته‌بندی</label
+                >
+                <select
+                  formControlName="foodCategory"
+                  class="w-full rounded-2xl bg-white/5 border border-white/10 px-4 py-4 text-white outline-none focus:border-amber-400 transition-all"
+                >
+                  @for (category of categoryService.categorys; track category) {
+                    <option class="bg-[#111827]" [value]="category.category">
+                      {{ category.title }}
+                    </option>
+                  }
+                </select>
+              </div>
+            </div>
+
+            @if (errorMessage !== undefined) {
+              <div
+                class="rounded-2xl border border-rose-500/20 bg-rose-500/10 px-4 py-3"
+              >
+                <h1
+                  class="yekan text-[0.85rem] sm:text-[0.9rem] font-bold text-rose-300 break-words"
+                >
+                  {{ errorMessage }}
+                </h1>
+              </div>
+            }
+
+            @if (successMessage !== undefined) {
+              <div
+                class="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3"
+              >
+                <h1
+                  class="yekan text-[0.85rem] sm:text-[0.9rem] font-bold text-emerald-300 break-words"
+                >
+                  {{ successMessage }}
+                </h1>
+              </div>
+            }
+
+            <div class="mt-2 sm:mt-3 flex flex-col sm:flex-row flex-wrap gap-3">
+              <button
+                (click)="updateFood()"
+                class="rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 px-6 py-4 yekan font-bold text-white hover:scale-[1.01] transition-all duration-300 shadow-lg flex items-center justify-center gap-3"
+              >
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="m5 13 4 4L19 7"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>ذخیره تغییرات</span>
+              </button>
+
+              <button
+                (click)="closeModal()"
+                class="rounded-2xl border border-red-400/20 bg-red-500/10 px-6 py-4 yekan font-bold text-red-300 hover:bg-red-500/20 transition-all duration-300 flex items-center justify-center gap-3"
+              >
+                <span>بستن</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     }
@@ -1280,18 +1710,70 @@
               />
             </svg>
           </div>
+
           <h1 class="yekan text-[1.4rem] sm:text-[1.8rem] font-extrabold">
             حذف محصول
           </h1>
+
           <p class="yekan text-white/60 text-[0.9rem] sm:text-[1rem]">
-            فرم حذف و انتخاب محصول برای حذف را می‌توانم مرحله بعد برات کامل کنم.
+            آیا از حذف این محصول مطمئن هستی؟
           </p>
-          <button
-            (click)="nowModal = undefined"
-            class="mt-3 rounded-2xl bg-red-500/15 border border-red-400/20 px-6 py-4 yekan font-bold text-red-300 hover:bg-red-500/25 transition-all"
-          >
-            بستن
-          </button>
+
+          @if (selectedProduct) {
+            <div
+              class="w-full rounded-2xl border border-white/10 bg-white/5 p-4 text-right"
+            >
+              <h2 class="yekan font-extrabold text-[1.1rem] text-white">
+                {{ selectedProduct.title }}
+              </h2>
+              <p class="yekan text-white/60 mt-2 text-[0.9rem]">
+                {{ selectedProduct.description }}
+              </p>
+              <p class="yekan text-amber-300 mt-3 font-bold">
+                {{ selectedProduct.price }}
+              </p>
+            </div>
+          }
+
+          @if (errorMessage !== undefined) {
+            <div
+              class="w-full rounded-2xl border border-rose-500/20 bg-rose-500/10 px-4 py-3"
+            >
+              <h1
+                class="yekan text-[0.85rem] sm:text-[0.9rem] font-bold text-rose-300 break-words"
+              >
+                {{ errorMessage }}
+              </h1>
+            </div>
+          }
+
+          @if (successMessage !== undefined) {
+            <div
+              class="w-full rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3"
+            >
+              <h1
+                class="yekan text-[0.85rem] sm:text-[0.9rem] font-bold text-emerald-300 break-words"
+              >
+                {{ successMessage }}
+              </h1>
+            </div>
+          }
+
+          <div class="mt-3 flex flex-col sm:flex-row gap-3">
+            <button
+              (click)="deleteSelectedProduct()"
+              class="rounded-2xl bg-red-600 px-6 py-4 yekan font-bold text-white hover:bg-red-700 transition-all"
+            >
+              حذف نهایی
+            </button>
+
+            <button
+              (click)="closeModal()"
+              class="rounded-2xl bg-red-500/15 border border-red-400/20 px-6 py-4 yekan font-bold text-red-300 hover:bg-red-500/25 transition-all"
+            >
+              بستن
+            </button>
+          </div>
         </div>
       </div>
     }
