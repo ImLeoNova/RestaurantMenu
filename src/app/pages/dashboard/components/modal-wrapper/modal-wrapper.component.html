@@ -1,0 +1,27 @@
+@if (isOpen) {
+  <div
+    class="fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-4"
+    (click)="onBackdropClick()"
+  >
+    <div
+      class="bg-[#0b0f19] border border-white/10 rounded-2xl max-w-md w-full shadow-2xl"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Header -->
+      <div class="flex justify-between items-center px-6 py-4 border-b border-white/10">
+        <h2 class="text-white font-bold text-lg">{{ title }}</h2>
+        <button
+          (click)="onCloseClick()"
+          class="text-white/60 hover:text-white transition-colors"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Content -->
+      <div class="px-6 py-6">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+}

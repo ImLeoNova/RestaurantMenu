@@ -1,0 +1,69 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+  <!-- Error Message -->
+  @if (errorMessage) {
+    <div class="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- Success Message -->
+  @if (successMessage) {
+    <div class="bg-green-500/20 border border-green-500/50 text-green-300 px-4 py-3 rounded-lg">
+      {{ successMessage }}
+    </div>
+  }
+
+  <!-- Username -->
+  <div>
+    <label class="block text-white font-bold mb-2">نام کاربری</label>
+    <input
+      type="text"
+      formControlName="username"
+      class="w-full bg-white/10 border border-white/20 text-white rounded-lg px-4 py-2 focus:border-amber-400 outline-none"
+      placeholder="نام کاربری"
+    />
+  </div>
+
+  <!-- Email -->
+  <div>
+    <label class="block text-white font-bold mb-2">ایمیل</label>
+    <input
+      type="email"
+      formControlName="email"
+      class="w-full bg-white/10 border border-white/20 text-white rounded-lg px-4 py-2 focus:border-amber-400 outline-none"
+      placeholder="ایمیل"
+    />
+  </div>
+
+  <!-- Role -->
+  <div>
+    <label class="block text-white font-bold mb-2">نقش</label>
+    <select
+      formControlName="role"
+      class="w-full bg-white/10 border border-white/20 text-white rounded-lg px-4 py-2 focus:border-amber-400 outline-none"
+    >
+      <option value="">انتخاب کنید</option>
+      @for (role of roles; track role) {
+        <option [value]="role" class="bg-gray-800">{{ role }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex gap-3 pt-4">
+    <button
+      type="submit"
+      [disabled]="form.invalid || isSubmitting"
+      class="flex-1 bg-gradient-to-r from-amber-400 to-orange-500 text-black font-bold py-2 rounded-lg hover:opacity-90 disabled:opacity-50"
+    >
+      {{ isSubmitting ? 'در حال ارسال...' : 'ذخیره' }}
+    </button>
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="flex-1 bg-white/10 border border-white/20 text-white font-bold py-2 rounded-lg hover:bg-white/20"
+    >
+      انصراف
+    </button>
+  </div>
+</form>

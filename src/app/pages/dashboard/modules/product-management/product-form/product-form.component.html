@@ -1,0 +1,105 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+  <!-- Error Message -->
+  @if (errorMessage) {
+    <div class="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- Success Message -->
+  @if (successMessage) {
+    <div class="bg-green-500/20 border border-green-500/50 text-green-300 px-4 py-3 rounded-lg">
+      {{ successMessage }}
+    </div>
+  }
+
+  <!-- Product Name -->
+  <div>
+    <label class="block text-white font-bold mb-2">نام محصول</label>
+    <input
+      type="text"
+      formControlName="foodName"
+      class="w-full bg-white/10 border border-white/20 text-white rounded-lg px-4 py-2 focus:border-amber-400 outline-none"
+      placeholder="نام محصول را وارد کنید"
+    />
+  </div>
+
+  <!-- Category -->
+  <div>
+    <label class="block text-white font-bold mb-2">دسته‌بندی</label>
+    <select
+      formControlName="foodCategory"
+      class="w-full bg-white/10 border border-white/20 text-white rounded-lg px-4 py-2 focus:border-amber-400 outline-none"
+    >
+      <option value="">انتخاب کنید</option>
+      @for (cat of categoryService.getCategories(); track cat.category) {
+        <option [value]="cat.category" class="bg-gray-800">{{ cat.title }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label class="block text-white font-bold mb-2">توضیحات</label>
+    <textarea
+      formControlName="foodDescription"
+      rows="4"
+      class="w-full bg-white/10 border border-white/20 text-white rounded-lg px-4 py-2 focus:border-amber-400 outline-none"
+      placeholder="توضیحات محصول"
+    ></textarea>
+  </div>
+
+  <!-- Price -->
+  <div>
+    <label class="block text-white font-bold mb-2">قیمت (هزار تومن)</label>
+    <input
+      type="number"
+      formControlName="foodPrice"
+      class="w-full bg-white/10 border border-white/20 text-white rounded-lg px-4 py-2 focus:border-amber-400 outline-none"
+      placeholder="قیمت را وارد کنید"
+    />
+  </div>
+
+  <!-- Image Upload -->
+  <div>
+    <label class="block text-white font-bold mb-2">تصویر محصول</label>
+    <div class="flex flex-col gap-4">
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onImageSelected($event)"
+        class="block w-full text-white bg-white/10 border border-white/20 rounded-lg p-2 cursor-pointer"
+      />
+      @if (imageSrc) {
+        <div class="relative">
+          <img [src]="imageSrc" alt="preview" class="w-32 h-32 object-cover rounded-lg" />
+          <button
+            type="button"
+            (click)="clearImage()"
+            class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+          >
+            ✕
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex gap-3 pt-4">
+    <button
+      type="submit"
+      [disabled]="form.invalid || isSubmitting"
+      class="flex-1 bg-gradient-to-r from-amber-400 to-orange-500 text-black font-bold py-2 rounded-lg hover:opacity-90 disabled:opacity-50"
+    >
+      {{ isSubmitting ? 'در حال ارسال...' : 'ذخیره' }}
+    </button>
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="flex-1 bg-white/10 border border-white/20 text-white font-bold py-2 rounded-lg hover:bg-white/20"
+    >
+      انصراف
+    </button>
+  </div>
+</form>
