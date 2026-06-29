@@ -1,0 +1,51 @@
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse">
+    <thead>
+      <tr class="bg-white/5 border-b border-white/10">
+        <th class="px-6 py-4 text-left text-white font-bold">نام محصول</th>
+        <th class="px-6 py-4 text-left text-white font-bold">دسته‌بندی</th>
+        <th class="px-6 py-4 text-left text-white font-bold">قیمت</th>
+        <th class="px-6 py-4 text-center text-white font-bold">عملیات</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (isLoading) {
+        <tr>
+          <td colspan="4" class="px-6 py-8 text-center text-white/60">
+            در حال بارگذاری...
+          </td>
+        </tr>
+      }
+
+      @if (!isLoading && products.length === 0) {
+        <tr>
+          <td colspan="4" class="px-6 py-8 text-center text-white/60">
+            محصولی یافت نشد
+          </td>
+        </tr>
+      }
+
+      @for (product of products; track product.product_ID) {
+        <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+          <td class="px-6 py-4 text-white">{{ product.title }}</td>
+          <td class="px-6 py-4 text-white/70">{{ product.category }}</td>
+          <td class="px-6 py-4 text-amber-400 font-bold">{{ product.price }} هزار تومن</td>
+          <td class="px-6 py-4 text-center">
+            <button
+              (click)="onEditClick(product)"
+              class="px-3 py-2 bg-blue-500/20 text-blue-300 rounded-lg hover:bg-blue-500/30 transition-colors mr-2"
+            >
+              ویرایش
+            </button>
+            <button
+              (click)="onDeleteClick(product)"
+              class="px-3 py-2 bg-red-500/20 text-red-300 rounded-lg hover:bg-red-500/30 transition-colors"
+            >
+              حذف
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
