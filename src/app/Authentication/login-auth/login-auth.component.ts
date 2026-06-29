@@ -59,7 +59,7 @@ export class LoginAuthComponent {
   submit() {
     const username = this.loginForm.controls['username'].value;
     const password = this.loginForm.controls['password'].value;
-    const userModel = new User(username, password, '', '', '[]');
+    const userModel = new User('', username, password, '', '', '[]');
 
     this.userService.loginUser(userModel).subscribe(
       (response: ApiResponse<LoginResponse>) => {

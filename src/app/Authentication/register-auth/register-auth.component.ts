@@ -57,7 +57,7 @@ export class RegisterAuthComponent {
       const email: string = this.registerForm.controls['email'].value;
       if (password == passwordConfirm) {
         this.errorMessage = undefined;
-        const userModel = new User(username, password, email, 'user', '');
+        const userModel = new User('', username, password, email, 'user', '');
         this.userService
           .registerUser(userModel)
           .subscribe((response: RegisterResponse) => {

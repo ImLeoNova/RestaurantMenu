@@ -1,3 +1,4 @@
+import { FoodMODEL } from './../../models/food-model';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../../state/app.state';
@@ -19,7 +20,6 @@ import {
 } from '@angular/forms';
 import { CategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
-import { FoodMODEL } from '../../models/food-model';
 import { ApiResponse } from '../../models/api-response';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { UserService } from '../../services/user.service';
@@ -35,7 +35,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 })
 export class DashboardComponent implements OnInit {
   token: string | null = null;
-  user: User = new User('', '', '', '', '[]');
+  user: User = new User('', '', '', '', '', '[]');
 
   nowPage: string = 'home';
   nowModal: string | undefined = undefined;
@@ -72,10 +72,18 @@ export class DashboardComponent implements OnInit {
     foodDescription: new FormControl('', [Validators.required]),
     foodPrice: new FormControl('', [Validators.required]),
   });
+
+  updateUserFORM: FormGroup = new FormGroup({
+    user_id: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    role: new FormControl('', [Validators.required]),
+  });
   users: User[] = [];
   filteredUsers: User[] = [];
   isLoadingUsers: boolean = false;
   searchUserKeyword: string = '';
+  selectedUser: User | null = null;
 
   constructor(
     private store: Store<{ auth: AuthState }>,
@@ -97,21 +105,7 @@ export class DashboardComponent implements OnInit {
           this.dashboardService.userDATA(this.token, userID).subscribe({
             next: (userData: any) => {
               this.user = userData.data;
-
-              if (
-                this.user.role === Roles.FOUNDER ||
-                this.user.role === Roles.ADMIN
-              ) {
-                console.log(this.token);
-
-                this.userService.getAllUsers(this.token).subscribe({
-                  next: (response) => {
-                    this.users = response.data.users;
-                    this.filteredUsers = response.data.users;
-                    console.log(this.filteredUsers);
-                  },
-                });
-              }
+              this.loadUsers();
             },
             error: () => {
               this.store.dispatch(logout());
@@ -125,8 +119,55 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  test(): void {
-    console.log('Test');
+  public loadUsers() {
+    if (this.user.role === Roles.FOUNDER || this.user.role === Roles.ADMIN) {
+      this.userService.adminGetAllUsers(this.token).subscribe({
+        next: (response: ApiResponse<User[]>) => {
+          this.users = response.data;
+          this.filteredUsers = response.data;
+        },
+      });
+    }
+  }
+
+  openEditUserModal(u: User): void {
+    this.selectedUser = u;
+    this.updateUserFORM.patchValue({
+      user_id: u.user_ID,
+      username: u.username,
+      email: u.email,
+      role: u.role,
+    });
+    this.openModal('edit_user');
+  }
+
+  updateAdminUser(): void {
+    this.errorMessage = undefined;
+    this.successMessage = undefined;
+
+    const { user_id, username, email, role } = this.updateUserFORM.value;
+
+    if (!username || !email || !role) {
+      this.errorMessage = 'لطفا تمام فیلدها را پر کنید';
+      return;
+    }
+
+    this.isSubmitting = true;
+
+    this.userService
+      .adminUpdateUser(this.token, user_id, { username, email, role })
+      .subscribe({
+        next: (response) => {
+          this.isSubmitting = false;
+          this.successMessage = response.message || 'کاربر با موفقیت ویرایش شد';
+          this.loadUsers();
+          setTimeout(() => this.closeModal(), 1000);
+        },
+        error: (err) => {
+          this.isSubmitting = false;
+          this.errorMessage = err?.error?.message || 'خطا در ویرایش کاربر';
+        },
+      });
   }
   ngOnInit(): void {
     this.loadProducts();
@@ -166,21 +207,29 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  openModal(modal: string, product?: FoodMODEL): void {
+  openModal(modal: string, item?: FoodMODEL | User): void {
     this.errorMessage = undefined;
     this.successMessage = undefined;
     this.nowModal = modal;
+    console.log('hi');
 
     if (modal === 'add') {
       this.resetAddForm();
     }
 
-    if ((modal === 'update' || modal === 'remove') && product) {
-      this.selectedProduct = product;
+    if (
+      (modal === 'update' || modal === 'remove') &&
+      item instanceof FoodMODEL
+    ) {
+      this.selectedProduct = item;
     }
 
-    if (modal === 'update' && product) {
-      this.prepareUpdateForm(product);
+    if (modal === 'update' && item instanceof FoodMODEL) {
+      this.prepareUpdateForm(item);
+    }
+
+    if (modal === 'delete_user') {
+      this.selectedUser = item as any;
     }
   }
 
@@ -189,6 +238,7 @@ export class DashboardComponent implements OnInit {
     this.errorMessage = undefined;
     this.successMessage = undefined;
     this.selectedProduct = null;
+    this.selectedUser = null;
     this.updateImageFile = undefined;
     this.updateImgSRC = null;
   }
@@ -390,6 +440,23 @@ export class DashboardComponent implements OnInit {
   onCategoryChange(category: string): void {
     this.categoryService.nowCategory = category;
     this.loadProducts(category, this.searchKeyword || undefined);
+  }
+
+  deleteAdminUser(user_ID: string | undefined) {
+    this.errorMessage = undefined;
+    this.successMessage = undefined;
+    this.userService.adminDeleteUser(this.token, user_ID).subscribe({
+      next: (response) => {
+        this.isSubmitting = false;
+        this.successMessage = response.message || 'کاربر با موفقیت حذف شد';
+        this.loadUsers();
+      },
+      error: (err) => {
+        this.isSubmitting = false;
+        this.errorMessage =
+          err?.error?.message || 'خطا در حذف کاربر. دوباره تلاش کنید';
+      },
+    });
   }
 
   resetAddForm(): void {
